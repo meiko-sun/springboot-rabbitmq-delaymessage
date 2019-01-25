@@ -1,0 +1,66 @@
+spring:
+  application:
+    name: springboot-rabbitmq-delaymessage
+  datasource:
+    url: jdbc:mysql://192.168.80.110:3306/qktx_db_dev?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=CTT
+    username: qktx_db_dev
+    password: qktx_db_dev
+    hikari:
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  data:
+    mongodb:
+      uri: mongodb://192.168.26.128:27017/
+      database: test
+  rabbitmq:
+    host: 192.168.26.128
+    port: 5672
+    username: admin
+    password: admin
+    listener:
+      simple:
+        retry:
+          enabled: true #是否开启消费者重试（为false时关闭消费者重试，这时消费端代码异常会一直重复收到消息）
+        acknowledge-mode: auto #自动签收模式
+#            max-attempts: 5 #最大重试次数
+#            initial-interval: 5000 #重试间隔时间（单位毫秒）
+#            max-interval: 1200000 #重试最大时间间隔（单位毫秒）
+#            multiplier: 5 #应用于前一重试间隔的乘法器。
+
+server:
+  port: 8080
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  type-aliases-package: cn.sundefa.start.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+#pagehelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+
+logging:
+  level:
+    cn.sundefa.start.mapper: info
+
+fw:
+  swagger:
+    enable: true
+    description: quickStart项目
+    version: 1.0
+    contactName: Defa sun
+    url: https://www.sundefa.cn/
+

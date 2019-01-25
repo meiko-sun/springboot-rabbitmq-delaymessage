@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sundefa.start.mapper.AdvertPositionMapper">
+    <resultMap id="BaseResultMap" type="cn.sundefa.start.entity.AdvertPosition">
+        <id column="advert_position_id" property="advertPositionId" jdbcType="INTEGER"/>
+        <result column="app_system" property="appSystem" jdbcType="BIT"/>
+        <result column="position_name" property="positionName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    advert_position_id, app_system, position_name, create_time
+  </sql>
+
+</mapper>
