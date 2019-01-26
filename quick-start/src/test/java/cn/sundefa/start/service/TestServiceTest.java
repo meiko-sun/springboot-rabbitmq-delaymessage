@@ -27,7 +27,7 @@ public class TestServiceTest {
             Integer time = i * 5000;
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = sdf.format(new Date());
-            amqpTemplate.convertAndSend("test_exchange", "delay_message", a, (MessagePostProcessor) message -> {
+            amqpTemplate.convertAndSend("testExchange", "delayMessage", a, (MessagePostProcessor) message -> {
                 message.getMessageProperties().setHeader("x-delay", time);
                 return message;
             });
@@ -43,7 +43,7 @@ public class TestServiceTest {
 
             Integer time = i * 5000;
             User user = User.builder().userId("123").age("23").creatTime(new Date()).name("44444").build();
-            amqpTemplate.convertAndSend("test_exchange", "delay_message", user, (MessagePostProcessor) message -> {
+            amqpTemplate.convertAndSend("testExchange", "delayMessage", user, (MessagePostProcessor) message -> {
                 message.getMessageProperties().setHeader("x-delay", time);
                 return message;
             });

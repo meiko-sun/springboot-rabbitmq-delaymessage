@@ -5,7 +5,6 @@ import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.CustomExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +14,7 @@ import java.util.Map;
  * @Author: defa Sun
  * @Date: 2019/1/25 16:21
  */
-@Configuration
+//@Configuration
 public class RabbitConfig {
 
     @Bean

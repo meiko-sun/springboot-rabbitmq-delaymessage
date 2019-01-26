@@ -2,8 +2,7 @@ package cn.sundefa.start.listener;
 
 import cn.sundefa.start.entity.User;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
@@ -16,7 +15,14 @@ import java.util.Date;
  */
 @Component
 @Slf4j
-@RabbitListener(queues = ("delay_message"))
+//@RabbitListener(queues = ("delay_message"))
+//声明定义queues
+@RabbitListener(queuesToDeclare = {@Queue(name = "delayMessage")})
+@RabbitListener(bindings = {@QueueBinding(value = @Queue(name = "delayMessage"),
+        //exchange
+        exchange = @Exchange(name = "testExchange", arguments = {@Argument(name = "x-delayed-type", value = "direct")}, type = "x-delayed-message")
+        //routingKey
+        , key = "delayMessage")})
 public class DefaultListener {
 
     @RabbitHandler
