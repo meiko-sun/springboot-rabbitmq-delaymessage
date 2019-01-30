@@ -2,8 +2,10 @@ package cn.sundefa.start.entity;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,6 +20,7 @@ import java.util.List;
 @Document
 @Data
 @Builder
+@ToString
 public class User implements Serializable {
 
     /**
@@ -40,5 +43,6 @@ public class User implements Serializable {
     /**
      * 创建时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date creatTime;
 }

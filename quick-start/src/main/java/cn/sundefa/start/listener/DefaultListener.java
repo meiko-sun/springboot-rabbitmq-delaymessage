@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * @Description:
@@ -37,8 +38,15 @@ public class DefaultListener {
     @RabbitHandler
     public void process(User user) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String format = sdf.format(new Date());
-        log.info("receive msg: {},执行时间：{}", user, format);
+        if (Optional.ofNullable(user).isPresent()) {
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = sdf.format(new Date());
+
+            log.info("receive msg: {},执行时间：{}", user, format);
+        } else {
+
+            log.info("wtf?");
+        }
     }
 }
